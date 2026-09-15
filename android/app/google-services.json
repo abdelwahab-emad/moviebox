@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "256085641929",
+    "project_id": "moviebox-51ec9",
+    "storage_bucket": "moviebox-51ec9.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:256085641929:android:1b79e5c0b4bce994c9db18",
+        "android_client_info": {
+          "package_name": "com.example.moviebox"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDm_ceQrjHIj6JmVn6mlvgrVC_pxAPgfH4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
