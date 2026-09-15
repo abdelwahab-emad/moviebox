@@ -3,7 +3,9 @@ import 'package:moviebox/Features/auth/data/models/user_model.dart';
 import 'package:moviebox/Features/auth/data/repos/auth_repo.dart';
 
 class AuthRepoImpl implements AuthRepo {
-  final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
+  final FirebaseAuth _firebaseAuth;
+  AuthRepoImpl(this._firebaseAuth);
+  
   @override
   Future<UserModel> registerWithEmailAndPassword({
     required String name,

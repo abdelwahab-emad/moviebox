@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:moviebox/Features/auth/data/repos/auth_repo.dart';
+import 'package:moviebox/Features/auth/presentation/manger/register_cubit.dart/register_cubit.dart';
 import 'package:moviebox/Features/auth/presentation/views/login_screen.dart';
+import 'package:moviebox/Features/auth/presentation/views/register_screen.dart';
+import 'package:moviebox/core/utils/di/service_locator.dart';
 import 'package:moviebox/core/utils/routes/app_routes.dart';
 
 class AppRouter {
@@ -11,7 +16,10 @@ class AppRouter {
       case AppRoutes.loginScreen:
         return MaterialPageRoute(builder: (_) => const LoginScreen());
       case AppRoutes.registerScreen:
-       // return MaterialPageRoute(builder: (_) => const RegisterScreen());
+        return MaterialPageRoute(builder: (_) => BlocProvider(
+          create: (context) => RegisterCubit(getIt()),
+          child: const RegisterScreen(),
+        ));
       default:
         return MaterialPageRoute(
           builder: (_) => Scaffold(
