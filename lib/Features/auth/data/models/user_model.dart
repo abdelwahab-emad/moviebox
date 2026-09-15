@@ -7,9 +7,9 @@ class UserModel {
 
   factory UserModel.fromFirebaseUser({
     required String uid,
-    required String? displayName,
-    required String? email,
+    required String displayName,
+    required String email,
   }) {
-    return UserModel(uid: uid, name: displayName ?? '', email: email ?? '');
+    return UserModel(uid: uid, name: displayName, email: email);
   }
 }
