@@ -9,7 +9,7 @@ class MovieBox extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      initialRoute: AppRoutes.loginScreen,
+      initialRoute: AppRoutes.registerScreen,
       onGenerateRoute: AppRouter.generateRoute,
     );
   }
