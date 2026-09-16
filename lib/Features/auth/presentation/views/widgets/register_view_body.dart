@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
 import 'package:moviebox/Features/auth/presentation/manger/register_cubit.dart/register_cubit.dart';
+import 'package:moviebox/Features/auth/presentation/views/widgets/auth_back_button.dart';
 import 'package:moviebox/Features/auth/presentation/views/widgets/custom_auth_button.dart';
 import 'package:moviebox/Features/auth/presentation/views/widgets/custom_auth_text_field.dart';
+import 'package:moviebox/Features/auth/presentation/views/widgets/register_header.dart';
 import 'package:moviebox/Features/auth/presentation/views/widgets/terms_and_privacy_text.dart';
-import 'package:moviebox/core/utils/assets.dart';
 import 'package:moviebox/core/utils/routes/app_routes.dart';
 import 'package:moviebox/core/utils/styles.dart';
 
@@ -76,35 +76,9 @@ class _RegisterViewBodyState extends State<RegisterViewBody> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  GestureDetector(
-                    onTap: () => Navigator.pop(context),
-                    child: Row(
-                      children: const [
-                        Icon(
-                          Icons.arrow_back_ios,
-                          size: 14,
-                          color: AppColors.textSecondary,
-                        ),
-                        Gap(6),
-                        Text(
-                          'Back',
-                          style: TextStyle(
-                            color: AppColors.textSecondary,
-                            fontSize: 14,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
+                  AuthBackButton(),
                   const Gap(24),
-                  Row(
-                    children: [
-                      SvgPicture.asset(AppAssets.logo, width: 38, height: 38),
-                      const Gap(10),
-                      SvgPicture.asset(AppAssets.movieBoxTitle, height: 26),
-                    ],
-                  ),
+                  RegisterHeader(),
                   const Gap(20),
                   const Text('Create account', style: AppTextStyles.heading),
                   const Gap(6),
