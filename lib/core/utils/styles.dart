@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 class AppColors {
-  AppColors._();
 
   static const Color background = Color(0xFF111315);
   static const Color inputBackground = Color(0xFF1E2024);
@@ -21,7 +20,6 @@ class AppColors {
 }
 
 class AppTextStyles {
-  AppTextStyles._();
 
   static const TextStyle heading = TextStyle(
     fontSize: 26,
