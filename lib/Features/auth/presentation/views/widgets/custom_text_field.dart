@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:moviebox/core/utils/styles.dart';
+import 'package:moviebox/core/styles.dart';
 
-class CustomAuthTextField extends StatelessWidget {
-  const CustomAuthTextField({
+class CustomTextField extends StatelessWidget {
+  const CustomTextField({
     super.key,
     required this.controller,
     required this.hint,

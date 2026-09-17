@@ -4,8 +4,8 @@ import 'package:moviebox/Features/auth/presentation/manger/login_cubit/login_cub
 import 'package:moviebox/Features/auth/presentation/manger/register_cubit.dart/register_cubit.dart';
 import 'package:moviebox/Features/auth/presentation/views/login_screen.dart';
 import 'package:moviebox/Features/auth/presentation/views/register_screen.dart';
-import 'package:moviebox/core/utils/di/service_locator.dart';
-import 'package:moviebox/core/utils/routes/app_routes.dart';
+import 'package:moviebox/core/di/service_locator.dart';
+import 'package:moviebox/core/routes/app_routes.dart';
 
 class AppRouter {
   static Route<dynamic> generateRoute(RouteSettings settings) {

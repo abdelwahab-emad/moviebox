@@ -1,8 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:moviebox/Features/auth/data/errors/auth_failure.dart';
 import 'package:moviebox/Features/auth/data/models/user_model.dart';
 import 'package:moviebox/Features/auth/data/repos/auth_repo.dart';
-import 'package:moviebox/core/errors/auth_failure.dart';
 
 class AuthRepoImpl implements AuthRepo {
   final FirebaseAuth _firebaseAuth;

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import 'package:moviebox/core/utils/styles.dart';
+import 'package:moviebox/core/styles.dart';
 
-class CustomAuthButton extends StatelessWidget {
-  const CustomAuthButton({
+class CustomButton extends StatelessWidget {
+  const CustomButton({
     super.key,
     required this.text,
     required this.onPressed,

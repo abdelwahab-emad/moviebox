@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:moviebox/Features/auth/presentation/manger/login_cubit/login_cubit.dart';
 import 'package:moviebox/Features/auth/presentation/views/widgets/login_view_body.dart';
-import 'package:moviebox/core/utils/styles.dart';
+import 'package:moviebox/core/styles.dart';
 
 
 class LoginScreen extends StatelessWidget {

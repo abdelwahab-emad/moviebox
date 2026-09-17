@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:moviebox/core/utils/styles.dart';
+import 'package:moviebox/core/styles.dart';
 
 class TermsAndPrivacyText extends StatelessWidget {
   const TermsAndPrivacyText({super.key});

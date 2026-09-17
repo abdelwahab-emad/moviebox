@@ -3,12 +3,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 import 'package:moviebox/Features/auth/presentation/manger/register_cubit.dart/register_cubit.dart';
 import 'package:moviebox/Features/auth/presentation/views/widgets/auth_back_button.dart';
-import 'package:moviebox/Features/auth/presentation/views/widgets/custom_auth_button.dart';
-import 'package:moviebox/Features/auth/presentation/views/widgets/custom_auth_text_field.dart';
+import 'package:moviebox/Features/auth/presentation/views/widgets/custom_button.dart';
+import 'package:moviebox/Features/auth/presentation/views/widgets/custom_text_field.dart';
 import 'package:moviebox/Features/auth/presentation/views/widgets/register_header.dart';
 import 'package:moviebox/Features/auth/presentation/views/widgets/terms_and_privacy_text.dart';
-import 'package:moviebox/core/utils/routes/app_routes.dart';
-import 'package:moviebox/core/utils/styles.dart';
+import 'package:moviebox/core/routes/app_routes.dart';
+import 'package:moviebox/core/styles.dart';
 
 class RegisterViewBody extends StatefulWidget {
   const RegisterViewBody({super.key});
@@ -89,7 +89,7 @@ class _RegisterViewBodyState extends State<RegisterViewBody> {
                   const Gap(28),
                   const Text('FULL NAME', style: AppTextStyles.label),
                   const Gap(8),
-                  CustomAuthTextField(
+                  CustomTextField(
                     controller: nameController,
                     hint: 'Alex Morgan',
                     validator: _validateName,
@@ -97,7 +97,7 @@ class _RegisterViewBodyState extends State<RegisterViewBody> {
                   const Gap(18),
                   const Text('EMAIL', style: AppTextStyles.label),
                   const Gap(8),
-                  CustomAuthTextField(
+                  CustomTextField(
                     controller: emailController,
                     hint: 'alex@email.com',
                     keyboardType: TextInputType.emailAddress,
@@ -106,7 +106,7 @@ class _RegisterViewBodyState extends State<RegisterViewBody> {
                   const Gap(18),
                   const Text('PASSWORD', style: AppTextStyles.label),
                   const Gap(8),
-                  CustomAuthTextField(
+                  CustomTextField(
                     controller: passwordController,
                     hint: 'Min. 8 characters',
                     obscureText: true,
@@ -115,7 +115,7 @@ class _RegisterViewBodyState extends State<RegisterViewBody> {
                   const Gap(16),
                   const TermsAndPrivacyText(),
                   const Gap(24),
-                  CustomAuthButton(
+                  CustomButton(
                     text: 'Create account',
                     isLoading: isLoading,
                     gradient: const LinearGradient(

@@ -5,11 +5,11 @@ import 'package:gap/gap.dart';
 import 'package:moviebox/Features/auth/presentation/manger/login_cubit/login_cubit.dart';
 import 'package:moviebox/Features/auth/presentation/views/widgets/auth_divider.dart';
 import 'package:moviebox/Features/auth/presentation/views/widgets/login_header.dart';
-import 'package:moviebox/Features/auth/presentation/views/widgets/custom_auth_button.dart';
-import 'package:moviebox/Features/auth/presentation/views/widgets/custom_auth_text_field.dart';
-import 'package:moviebox/core/utils/assets.dart';
-import 'package:moviebox/core/utils/routes/app_routes.dart';
-import 'package:moviebox/core/utils/styles.dart';
+import 'package:moviebox/Features/auth/presentation/views/widgets/custom_button.dart';
+import 'package:moviebox/Features/auth/presentation/views/widgets/custom_text_field.dart';
+import 'package:moviebox/core/assets.dart';
+import 'package:moviebox/core/routes/app_routes.dart';
+import 'package:moviebox/core/styles.dart';
 
 class LoginViewBody extends StatefulWidget {
   const LoginViewBody({super.key});
@@ -84,7 +84,7 @@ class _LoginViewBodyState extends State<LoginViewBody> {
                         const Gap(28),
                         const Text('EMAIL', style: AppTextStyles.label),
                         const Gap(8),
-                        CustomAuthTextField(
+                        CustomTextField(
                           controller: emailController,
                           hint: 'alex.morgan@email.com',
                           keyboardType: TextInputType.emailAddress,
@@ -93,7 +93,7 @@ class _LoginViewBodyState extends State<LoginViewBody> {
                         const Gap(18),
                         const Text('PASSWORD', style: AppTextStyles.label),
                         const Gap(8),
-                        CustomAuthTextField(
+                        CustomTextField(
                           controller: passwordController,
                           hint: '••••••••',
                           obscureText: true,
@@ -115,7 +115,7 @@ class _LoginViewBodyState extends State<LoginViewBody> {
                         ),
 
                         const Gap(20),
-                        CustomAuthButton(
+                        CustomButton(
                           text: 'Log in',
                           isLoading: isLoading,
                           gradient: const LinearGradient(
@@ -131,7 +131,7 @@ class _LoginViewBodyState extends State<LoginViewBody> {
                         AuthDivider(),
                         const Gap(18),
 
-                        CustomAuthButton(
+                        CustomButton(
                           text: 'Continue with Google',
                           backgroundColor: AppColors.inputBackground,
                           borderColor: AppColors.inputBorder,

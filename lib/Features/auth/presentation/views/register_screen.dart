@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:moviebox/Features/auth/presentation/manger/register_cubit.dart/register_cubit.dart';
 import 'package:moviebox/Features/auth/presentation/views/widgets/register_view_body.dart';
-import 'package:moviebox/core/utils/routes/app_routes.dart';
-import 'package:moviebox/core/utils/styles.dart';
+import 'package:moviebox/core/routes/app_routes.dart';
+import 'package:moviebox/core/styles.dart';
 
 
 class RegisterScreen extends StatelessWidget {
