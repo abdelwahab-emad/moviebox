@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:moviebox/core/errors/failures.dart';
 
 class AuthFailure extends Failure {
@@ -59,6 +60,37 @@ class AuthFailure extends Failure {
       default:
         return AuthFailure(
           e.message ?? 'Authentication failed. Please try again.',
+        );
+    }
+  }
+
+  
+  factory AuthFailure.fromGoogleSignInError(GoogleSignInException e) {
+    switch (e.code) {
+      case GoogleSignInExceptionCode.canceled:
+        return AuthFailure('Google sign-in was cancelled.');
+
+      case GoogleSignInExceptionCode.interrupted:
+        return AuthFailure('Sign-in was interrupted. Please try again.');
+
+      case GoogleSignInExceptionCode.clientConfigurationError:
+        return AuthFailure(
+          'Google sign-in is not configured correctly for this app.',
+        );
+
+      case GoogleSignInExceptionCode.providerConfigurationError:
+        return AuthFailure(
+          'Google sign-in is not set up correctly on this device.',
+        );
+
+      case GoogleSignInExceptionCode.uiUnavailable:
+        return AuthFailure(
+          'Google sign-in UI is unavailable right now. Please try again.',
+        );
+
+      default:
+        return AuthFailure(
+          e.description ?? 'Google sign-in failed. Please try again.',
         );
     }
   }

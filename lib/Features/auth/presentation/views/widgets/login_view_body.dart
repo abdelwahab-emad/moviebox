@@ -142,6 +142,7 @@ class _LoginViewBodyState extends State<LoginViewBody> {
                             height: 18,
                           ),
                           onPressed: () {
+                            context.read<LoginCubit>().loginWithGoogle();
                           },
                         ),
 

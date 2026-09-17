@@ -12,5 +12,8 @@ abstract class AuthRepo {
     required String password,
   });
 
+
+  Future<UserModel> signInWithGoogle();
+
   Future<void> logOut();
 }

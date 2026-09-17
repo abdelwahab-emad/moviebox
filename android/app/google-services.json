@@ -12,7 +12,20 @@
           "package_name": "com.example.moviebox"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "256085641929-a0hv59dglvh1dsipq4l0klhpi05ukq1u.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.moviebox",
+            "certificate_hash": "6b2af50e4a6af76e8e8c521ea227161b79407b49"
+          }
+        },
+        {
+          "client_id": "256085641929-7t3tu2d8e8404jthibl8nmap8maivk8u.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyDm_ceQrjHIj6JmVn6mlvgrVC_pxAPgfH4"
@@ -20,7 +33,19 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "256085641929-7t3tu2d8e8404jthibl8nmap8maivk8u.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "256085641929-q8slom22ofrc09u96cicp6pfib7kda9r.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.moviebox"
+              }
+            }
+          ]
         }
       }
     }

@@ -1,11 +1,14 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:moviebox/Features/auth/data/models/user_model.dart';
 import 'package:moviebox/Features/auth/data/repos/auth_repo.dart';
 import 'package:moviebox/core/errors/auth_failure.dart';
 
 class AuthRepoImpl implements AuthRepo {
   final FirebaseAuth _firebaseAuth;
-  AuthRepoImpl(this._firebaseAuth);
+  final GoogleSignIn _googleSignIn;
+
+  AuthRepoImpl(this._firebaseAuth, this._googleSignIn);
 
   @override
   Future<UserModel> registerWithEmailAndPassword({
@@ -57,8 +60,27 @@ class AuthRepoImpl implements AuthRepo {
   }
 
   @override
-  Future<void> logOut() {
-    // TODO: implement logOut
-    throw UnimplementedError();
+  Future<UserModel> signInWithGoogle() async {
+    try {
+      final googleUser = await _googleSignIn.authenticate();
+      final idToken = googleUser.authentication.idToken;
+      final credential = GoogleAuthProvider.credential(idToken: idToken);
+      final userCredential = await _firebaseAuth.signInWithCredential(
+        credential,
+      );
+      final user = userCredential.user!;
+      return UserModel.fromFirebaseUser(
+        uid: user.uid,
+        displayName: user.displayName ?? '',
+        email: user.email!,
+      );
+    } on GoogleSignInException catch (e) {
+      throw AuthFailure.fromGoogleSignInError(e);
+    } on FirebaseAuthException catch (e) {
+      throw AuthFailure.fromFirebaseError(e);
+    }
   }
+
+  @override
+  Future<void> logOut() async {}
 }

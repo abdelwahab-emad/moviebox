@@ -7,6 +7,6 @@ import 'package:moviebox/movie_box.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-  setupGetIt();
+  await setupGetIt();
   runApp(const MovieBox());
 }
