@@ -33,7 +33,7 @@ class HomeRepoImpl implements HomeRepo {
   @override
   Future<ApiResult<List<MovieModel>>> getNowPlayingMovies() async {
     try {
-      final response = await _dio.get(ApiConstants.topRatedMovies);
+      final response = await _dio.get(ApiConstants.nowPlayingMovies);
       final movies = _mapToMovieList(response.data);
       return Success(movies);
     } catch (e) {
