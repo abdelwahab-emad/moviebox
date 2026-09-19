@@ -4,6 +4,10 @@ import 'package:moviebox/Features/auth/presentation/manger/login_cubit/login_cub
 import 'package:moviebox/Features/auth/presentation/manger/register_cubit.dart/register_cubit.dart';
 import 'package:moviebox/Features/auth/presentation/views/login_screen.dart';
 import 'package:moviebox/Features/auth/presentation/views/register_screen.dart';
+import 'package:moviebox/Features/home/presentation/manger/now_playing_movies_cubit/now_playing_movies_cubit.dart';
+import 'package:moviebox/Features/home/presentation/manger/popular_movies_cubit/popular_movies_cubit.dart';
+import 'package:moviebox/Features/home/presentation/manger/top_rated_movies_cubit/top_rated_movies_cubit.dart';
+import 'package:moviebox/Features/home/presentation/views/home_screen.dart';
 import 'package:moviebox/core/di/service_locator.dart';
 import 'package:moviebox/core/routes/app_routes.dart';
 
@@ -24,6 +28,18 @@ class AppRouter {
           builder: (_) => BlocProvider(
             create: (context) => RegisterCubit(getIt()),
             child: const RegisterScreen(),
+          ),
+        );
+
+      case AppRoutes.homeScreen:
+        return MaterialPageRoute(
+          builder: (_) => MultiBlocProvider(
+            providers: [
+              BlocProvider(create: (context) => PopularMoviesCubit(getIt())),
+              BlocProvider(create: (context) => TopRatedMoviesCubit(getIt())),
+              BlocProvider(create: (context) => NowPlayingMoviesCubit(getIt())),
+            ],
+            child: const HomeScreen(),
           ),
         );
       default:

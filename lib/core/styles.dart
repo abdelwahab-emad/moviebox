@@ -17,6 +17,8 @@ class AppColors {
   static const Color textSecondary = Color(0xFF8E95A2);
   static const Color textHint = Color(0xFF5D636F);
 
+  static const Color star = Color(0xFFFFC107);
+
 }
 
 class AppTextStyles {
