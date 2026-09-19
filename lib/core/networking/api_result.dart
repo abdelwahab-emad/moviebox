@@ -2,13 +2,13 @@ sealed class ApiResult<T> {
   const ApiResult();
 }
 
-class Success<T> extends ApiResult {
+class Success<T> extends ApiResult<T> {
   final T data;
 
   Success(this.data);
 }
 
-class Failure extends ApiResult {
+class Failure<T> extends ApiResult<T> {
   final String message;
 
   Failure(this.message);

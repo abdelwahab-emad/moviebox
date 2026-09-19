@@ -36,7 +36,8 @@ class DioFactory {
     _dio!.interceptors.add(
       InterceptorsWrapper(
         onRequest: (options, handler) {
-          options.headers['Authorization'] = 'Bearer ${ApiConstants.accessToken}';
+          options.headers['Authorization'] =
+              'Bearer ${ApiConstants.accessToken}';
           return handler.next(options);
         },
       ),
