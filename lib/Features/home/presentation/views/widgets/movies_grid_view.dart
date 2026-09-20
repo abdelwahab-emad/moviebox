@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:moviebox/Features/home/data/models/movie_model.dart';
 import 'package:moviebox/Features/home/presentation/views/widgets/movie_card.dart';
+import 'package:moviebox/core/routes/app_routes.dart';
 import 'package:moviebox/core/styles.dart';
 
 class MoviesGridView extends StatelessWidget {
@@ -29,7 +30,16 @@ class MoviesGridView extends StatelessWidget {
       ),
       itemBuilder: (context, index) {
         final movie = movies[index];
-        return MovieCard(movie: movie, onTap: () {});
+        return MovieCard(
+          movie: movie,
+          onTap: () {
+            Navigator.pushNamed(
+              context,
+              AppRoutes.movieDetailsScreen,
+              arguments: movie.id,
+            );
+          },
+        );
       },
     );
   }

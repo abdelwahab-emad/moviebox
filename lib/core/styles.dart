@@ -18,7 +18,7 @@ class AppColors {
   static const Color textHint = Color(0xFF5D636F);
 
   static const Color star = Color(0xFFFFC107);
-
+  static const Color favourite = Color(0xFFB39DDB);
 }
 
 class AppTextStyles {

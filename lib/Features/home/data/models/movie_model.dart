@@ -1,3 +1,4 @@
+/// Path: lib/Features/home/data/models/movie_model.dart
 class MovieModel {
   final int id;
   final String title;
@@ -7,6 +8,8 @@ class MovieModel {
   final String? releaseDate;
   final String overview;
   final List<int> genreIds;
+  final List<String> genres; // filled only on the Details screen
+  final int? runtime; // filled only on the Details screen
 
   MovieModel({
     required this.id,
@@ -17,6 +20,8 @@ class MovieModel {
     required this.releaseDate,
     required this.overview,
     required this.genreIds,
+    this.genres = const [],
+    this.runtime,
   });
 
   factory MovieModel.fromJson(Map<String, dynamic> json) {
@@ -29,6 +34,10 @@ class MovieModel {
       releaseDate: json['release_date'],
       overview: json['overview'] ?? '',
       genreIds: List<int>.from(json['genre_ids'] ?? []),
+      genres: json['genres'] == null
+          ? []
+          : List<String>.from(json['genres'].map((g) => g['name'])),
+      runtime: json['runtime'],
     );
   }
 }
