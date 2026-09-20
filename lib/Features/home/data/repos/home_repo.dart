@@ -5,4 +5,6 @@ abstract class HomeRepo {
   Future<ApiResult<List<MovieModel>>> getPopularMovies();
   Future<ApiResult<List<MovieModel>>> getTopRatedMovies();
   Future<ApiResult<List<MovieModel>>> getNowPlayingMovies();
+  Future<ApiResult<MovieModel>> getMovieDetails(int movieId);
+  Future<ApiResult<List<MovieModel>>> getSimilarMovies(int movieId);
 }

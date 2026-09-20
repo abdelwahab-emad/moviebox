@@ -41,6 +41,28 @@ class HomeRepoImpl implements HomeRepo {
     }
   }
 
+  @override
+  Future<ApiResult<MovieModel>> getMovieDetails(int movieId) async {
+    try {
+      final response = await _dio.get(ApiConstants.movieDetails(movieId));
+      final movie = MovieModel.fromJson(response.data);
+      return Success(movie);
+    } catch (e) {
+      return Failure(ApiErrorHandler.handle(e).message);
+    }
+  }
+
+  @override
+  Future<ApiResult<List<MovieModel>>> getSimilarMovies(int movieId) async {
+    try {
+      final response = await _dio.get(ApiConstants.similarMovies(movieId));
+      final movies = _mapToMovieList(response.data);
+      return Success(movies);
+    } catch (e) {
+      return Failure(ApiErrorHandler.handle(e).message);
+    }
+  }
+
   List<MovieModel> _mapToMovieList(dynamic responseData) {
     final List results = responseData['results'] ?? [];
     return results.map((json) => MovieModel.fromJson(json)).toList();
