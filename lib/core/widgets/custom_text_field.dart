@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:moviebox/core/styles.dart';
 
-class CustomAuthTextField extends StatelessWidget {
-  const CustomAuthTextField({
+class CustomTextField extends StatelessWidget {
+  const CustomTextField({
     super.key,
     required this.controller,
     required this.hint,
     this.obscureText = false,
     this.keyboardType,
     this.validator,
+    this.onChanged,
+    this.prefixIcon,
   });
 
   final TextEditingController controller;
@@ -16,6 +18,8 @@ class CustomAuthTextField extends StatelessWidget {
   final bool obscureText;
   final TextInputType? keyboardType;
   final String? Function(String?)? validator;
+  final ValueChanged<String>? onChanged;
+  final Widget? prefixIcon;
 
   @override
   Widget build(BuildContext context) {
@@ -24,12 +28,14 @@ class CustomAuthTextField extends StatelessWidget {
       obscureText: obscureText,
       keyboardType: keyboardType,
       validator: validator,
+      onChanged: onChanged,
       autovalidateMode: AutovalidateMode.onUserInteraction,
       style: AppTextStyles.body,
       cursorColor: AppColors.cursor,
       cursorWidth: 2.0,
       decoration: InputDecoration(
         hintText: hint,
+        prefixIcon: prefixIcon,
         hintStyle: const TextStyle(
           color: AppColors.textHint,
           fontSize: 14,

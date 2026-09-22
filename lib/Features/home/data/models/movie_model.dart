@@ -1,4 +1,3 @@
-/// Path: lib/Features/home/data/models/movie_model.dart
 class MovieModel {
   final int id;
   final String title;
@@ -8,8 +7,8 @@ class MovieModel {
   final String? releaseDate;
   final String overview;
   final List<int> genreIds;
-  final List<String> genres; // filled only on the Details screen
-  final int? runtime; // filled only on the Details screen
+  final List<String> genres; 
+  final int? runtime;
 
   MovieModel({
     required this.id,

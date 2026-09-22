@@ -3,4 +3,5 @@ import 'package:moviebox/core/networking/api_result.dart';
 
 abstract class SearchRepo {
   Future<ApiResult<List<MovieModel>>> searchMovies(String query);
+  Future<ApiResult<List<MovieModel>>> getTrendingMovies();
 }

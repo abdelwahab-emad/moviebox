@@ -24,4 +24,17 @@ class SearchRepoImpl extends SearchRepo {
       return Failure(ApiErrorHandler.handle(e).message);
     }
   }
+
+  @override
+  Future<ApiResult<List<MovieModel>>> getTrendingMovies() async {
+    try {
+      final response = await _dio.get(ApiConstants.trendingMovies);
+ 
+      final List results = response.data['results'] ?? [];
+      final movies = results.map((json) => MovieModel.fromJson(json)).toList();
+      return Success(movies);
+    } catch (e) {
+      return Failure(ApiErrorHandler.handle(e).message);
+    }
+  }
 }

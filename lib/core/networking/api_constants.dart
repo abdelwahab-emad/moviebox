@@ -8,10 +8,12 @@ class ApiConstants {
   static const String popularMovies = '/movie/popular';
   static const String topRatedMovies = '/movie/top_rated';
   static const String nowPlayingMovies = '/movie/now_playing';
+  static const String trendingMovies = '/trending/movie/day';
+  static const String genreList = '/genre/movie/list';
   static String movieDetails(int movieId) => '/movie/$movieId';
   static String similarMovies(int movieId) => '/movie/$movieId/similar';
   static String searchMovies = '/search/movie';
-
+ 
 
   static const String imageBaseUrl = 'https://image.tmdb.org/t/p/w500';
 }

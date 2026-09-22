@@ -8,6 +8,9 @@ import 'package:moviebox/Features/home/data/repos/home_repo.dart';
 import 'package:moviebox/Features/home/data/repos/home_repo_impl.dart';
 import 'package:moviebox/Features/search/data/repos/search_repo.dart';
 import 'package:moviebox/Features/search/data/repos/search_repo_impl.dart';
+import 'package:moviebox/core/genres/genre_cache.dart';
+import 'package:moviebox/core/genres/genre_repo.dart';
+import 'package:moviebox/core/genres/genre_repo_impl.dart';
 import 'package:moviebox/core/networking/dio_factory.dart';
 
 GetIt getIt = GetIt.instance;
@@ -28,4 +31,8 @@ Future<void> setupGetIt() async {
   getIt.registerLazySingleton<Dio>(() => DioFactory.getDio());
   getIt.registerLazySingleton<HomeRepo>(() => HomeRepoImpl(getIt()));
   getIt.registerLazySingleton<SearchRepo>(() => SearchRepoImpl(getIt()));
+
+  getIt.registerLazySingleton<GenreRepo>(() => GenreRepoImpl(getIt()));
+  getIt.registerLazySingleton<GenreCache>(() => GenreCache());
+  await getIt<GenreCache>().load(getIt<GenreRepo>());
 }

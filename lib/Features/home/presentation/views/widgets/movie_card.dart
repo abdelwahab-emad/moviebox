@@ -3,6 +3,7 @@ import 'package:gap/gap.dart';
 import 'package:moviebox/Features/home/data/models/movie_model.dart';
 import 'package:moviebox/core/networking/api_constants.dart';
 import 'package:moviebox/core/styles.dart';
+import 'package:moviebox/core/widgets/star_rating.dart';
 
 class MovieCard extends StatelessWidget {
   final MovieModel movie;
@@ -36,7 +37,7 @@ class MovieCard extends StatelessWidget {
             ),
           ),
           const Gap(2),
-          _StarRating(voteAverage: movie.voteAverage),
+          StarRating(voteAverage: movie.voteAverage),
         ],
       ),
     );
@@ -74,31 +75,3 @@ class MovieCard extends StatelessWidget {
   }
 }
 
-class _StarRating extends StatelessWidget {
-  final double voteAverage;
-
-  const _StarRating({required this.voteAverage});
-
-  @override
-  Widget build(BuildContext context) {
-    final starsOutOfFive = voteAverage / 2;
-
-    return Row(
-      children: [
-        ...List.generate(5, (index) {
-          final filled = index < starsOutOfFive.round();
-          return Icon(
-            filled ? Icons.star_rounded : Icons.star_outline_rounded,
-            color: AppColors.star,
-            size: 11,
-          );
-        }),
-        const Gap(4),
-        Text(
-          voteAverage.toStringAsFixed(1),
-          style: const TextStyle(color: AppColors.textSecondary, fontSize: 11),
-        ),
-      ],
-    );
-  }
-}

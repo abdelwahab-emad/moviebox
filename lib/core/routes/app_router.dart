@@ -10,6 +10,9 @@ import 'package:moviebox/Features/home/presentation/manger/popular_movies_cubit/
 import 'package:moviebox/Features/home/presentation/manger/top_rated_movies_cubit/top_rated_movies_cubit.dart';
 import 'package:moviebox/Features/home/presentation/views/home_screen.dart';
 import 'package:moviebox/Features/home/presentation/views/movie_details_screen.dart';
+import 'package:moviebox/Features/search/presentation/manger/search_cubit/search_cubit.dart';
+import 'package:moviebox/Features/search/presentation/manger/trending_cubit/trending_cubit.dart';
+import 'package:moviebox/Features/search/presentation/views/search_screen.dart';
 import 'package:moviebox/core/di/service_locator.dart';
 import 'package:moviebox/core/routes/app_routes.dart';
 
@@ -51,6 +54,19 @@ class AppRouter {
             create: (context) =>
                 MovieDetailsCubit(getIt())..getMovieDetails(movieId),
             child: const MovieDetailsScreen(),
+          ),
+        );
+
+      case AppRoutes.searchScreen:
+        return MaterialPageRoute(
+          builder: (_) => MultiBlocProvider(
+            providers: [
+              BlocProvider(create: (context) => SearchCubit(getIt())),
+              BlocProvider(
+                create: (context) => TrendingCubit(getIt())..loadTrending(),
+              ),
+            ],
+            child: const SearchScreen(),
           ),
         );
       default:
