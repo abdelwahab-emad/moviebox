@@ -1,9 +1,12 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dio/dio.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get_it/get_it.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:moviebox/Features/auth/data/repos/auth_repo.dart';
 import 'package:moviebox/Features/auth/data/repos/auth_repo_impl.dart';
+import 'package:moviebox/Features/favorites/data/repos/favorites_repo.dart';
+import 'package:moviebox/Features/favorites/data/repos/favorites_repo_impl.dart';
 import 'package:moviebox/Features/home/data/repos/home_repo.dart';
 import 'package:moviebox/Features/home/data/repos/home_repo_impl.dart';
 import 'package:moviebox/Features/search/data/repos/search_repo.dart';
@@ -35,4 +38,11 @@ Future<void> setupGetIt() async {
   getIt.registerLazySingleton<GenreRepo>(() => GenreRepoImpl(getIt()));
   getIt.registerLazySingleton<GenreCache>(() => GenreCache());
   await getIt<GenreCache>().load(getIt<GenreRepo>());
+
+  getIt.registerLazySingleton<FirebaseFirestore>(
+    () => FirebaseFirestore.instance,
+  );
+  getIt.registerLazySingleton<FavoritesRepo>(
+    () => FavoritesRepoImpl(getIt(), getIt()),
+  );
 }

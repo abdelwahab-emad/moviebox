@@ -39,4 +39,17 @@ class MovieModel {
       runtime: json['runtime'],
     );
   }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'title': title,
+      'poster_path': posterPath,
+      'backdrop_path': backdropPath,
+      'vote_average': voteAverage,
+      'release_date': releaseDate,
+      'overview': overview,
+      'genre_ids': genreIds,
+    };
+  }
 }
