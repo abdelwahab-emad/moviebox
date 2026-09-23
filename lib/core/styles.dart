@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 class AppColors {
-
   static const Color background = Color(0xFF111315);
   static const Color inputBackground = Color(0xFF1E2024);
   static const Color inputBorder = Color(0xFF282B30);
@@ -18,11 +17,12 @@ class AppColors {
   static const Color textHint = Color(0xFF5D636F);
 
   static const Color star = Color(0xFFFFC107);
-  static const Color favourite = Color(0xFFB39DDB);
+  
+  static const Color favouriteInactive = Color(0xFFA59FE9);
+  static const Color favouriteActive = Color(0xFF4DB6AC);
 }
 
 class AppTextStyles {
-
   static const TextStyle heading = TextStyle(
     fontSize: 26,
     fontWeight: FontWeight.w800,

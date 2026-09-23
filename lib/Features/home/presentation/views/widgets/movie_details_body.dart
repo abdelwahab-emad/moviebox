@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
+import 'package:moviebox/Features/favorites/presentation/manger/cubit/favorites_cubit.dart';
 import 'package:moviebox/Features/home/presentation/manger/move_details_cubit/movie_details_cubit.dart';
 import 'package:moviebox/Features/home/presentation/views/widgets/genre_chips.dart';
 import 'package:moviebox/Features/home/presentation/views/widgets/movie_backdrop_header.dart';
@@ -22,10 +24,24 @@ class MovieDetailsBody extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          MovieBackdropHeader(
-            movie: movie,
-            isFavorite: false,
-            onFavoriteTap: () {},
+          BlocBuilder<FavoritesCubit, FavoritesState>(
+            builder: (context, favState) {
+              final isFavorite = favState is FavoritesSuccess &&
+                  favState.movies.any((m) => m.id == movie.id);
+
+              return MovieBackdropHeader(
+                movie: movie,
+                isFavorite: isFavorite,
+                onFavoriteTap: () {
+                  final favoritesCubit = context.read<FavoritesCubit>();
+                  if (isFavorite) {
+                    favoritesCubit.removeFavorite(movie.id);
+                  } else {
+                    favoritesCubit.addFavorite(movie);
+                  }
+                },
+              );
+            },
           ),
           Padding(
             padding: const EdgeInsets.all(20),

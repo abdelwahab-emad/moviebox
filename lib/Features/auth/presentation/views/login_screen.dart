@@ -16,7 +16,7 @@ class LoginScreen extends StatelessWidget {
       body: BlocListener<LoginCubit, LoginState>(
         listener: (context, state) {
           if (state is LoginSuccess) {
-            Navigator.pushReplacementNamed(context, AppRoutes.homeScreen);
+            Navigator.pushReplacementNamed(context, AppRoutes.favoritesScreen);
           } else if (state is LoginFailure) {
             ScaffoldMessenger.of(context)
                 .showSnackBar(SnackBar(content: Text(state.error)));

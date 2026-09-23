@@ -4,6 +4,7 @@ import 'package:moviebox/Features/auth/presentation/manger/login_cubit/login_cub
 import 'package:moviebox/Features/auth/presentation/manger/register_cubit.dart/register_cubit.dart';
 import 'package:moviebox/Features/auth/presentation/views/login_screen.dart';
 import 'package:moviebox/Features/auth/presentation/views/register_screen.dart';
+import 'package:moviebox/Features/favorites/presentation/views/favorites_screen.dart';
 import 'package:moviebox/Features/home/presentation/manger/move_details_cubit/movie_details_cubit.dart';
 import 'package:moviebox/Features/home/presentation/manger/now_playing_movies_cubit/now_playing_movies_cubit.dart';
 import 'package:moviebox/Features/home/presentation/manger/popular_movies_cubit/popular_movies_cubit.dart';
@@ -69,6 +70,10 @@ class AppRouter {
             child: const SearchScreen(),
           ),
         );
+
+      case AppRoutes.favoritesScreen:
+        return MaterialPageRoute(builder: (_) => const FavoritesScreen());
+
       default:
         return MaterialPageRoute(
           builder: (_) => Scaffold(

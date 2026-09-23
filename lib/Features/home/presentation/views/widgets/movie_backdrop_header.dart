@@ -47,10 +47,12 @@ class MovieBackdropHeader extends StatelessWidget {
               onTap: onFavoriteTap,
               child: CircleAvatar(
                 radius: 18,
-                backgroundColor: AppColors.favourite.withValues(alpha: 0.85),
+                backgroundColor: isFavorite
+                    ? AppColors.favouriteActive
+                    : AppColors.favouriteInactive,
                 child: Icon(
                   isFavorite ? Icons.favorite : Icons.favorite_border,
-                  color: isFavorite ? Colors.redAccent : Colors.white,
+                  color: Colors.white,
                   size: 18,
                 ),
               ),
