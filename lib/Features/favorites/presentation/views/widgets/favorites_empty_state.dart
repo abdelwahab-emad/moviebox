@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import 'package:moviebox/core/routes/app_routes.dart';
+import 'package:moviebox/core/navigation_controller.dart';
 import 'package:moviebox/core/styles.dart';
 
 class FavoritesEmptyState extends StatelessWidget {
@@ -44,11 +44,7 @@ class FavoritesEmptyState extends StatelessWidget {
             width: 180,
             child: ElevatedButton(
               onPressed: () {
-                Navigator.pushNamedAndRemoveUntil(
-                  context,
-                  AppRoutes.homeScreen,
-                  (route) => false,
-                );
+                NavController.selectedIndex.value = 0;
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: AppColors.favouriteInactive,
@@ -60,7 +56,10 @@ class FavoritesEmptyState extends StatelessWidget {
               ),
               child: Text(
                 'Browse Movies',
-                style: AppTextStyles.button.copyWith(fontSize: 14, color: Colors.black),
+                style: AppTextStyles.button.copyWith(
+                  fontSize: 14,
+                  color: Colors.black,
+                ),
               ),
             ),
           ),

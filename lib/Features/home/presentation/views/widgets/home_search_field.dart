@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import 'package:moviebox/core/routes/app_routes.dart';
+import 'package:moviebox/core/navigation_controller.dart';
 import 'package:moviebox/core/styles.dart';
 
 class HomeSearchField extends StatelessWidget {
@@ -10,7 +10,7 @@ class HomeSearchField extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.pushNamed(context, AppRoutes.searchScreen);
+         NavController.selectedIndex.value = 1;
       },
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),

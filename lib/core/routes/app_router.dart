@@ -4,16 +4,14 @@ import 'package:moviebox/Features/auth/presentation/manger/login_cubit/login_cub
 import 'package:moviebox/Features/auth/presentation/manger/register_cubit.dart/register_cubit.dart';
 import 'package:moviebox/Features/auth/presentation/views/login_screen.dart';
 import 'package:moviebox/Features/auth/presentation/views/register_screen.dart';
-import 'package:moviebox/Features/favorites/presentation/views/favorites_screen.dart';
 import 'package:moviebox/Features/home/presentation/manger/move_details_cubit/movie_details_cubit.dart';
 import 'package:moviebox/Features/home/presentation/manger/now_playing_movies_cubit/now_playing_movies_cubit.dart';
 import 'package:moviebox/Features/home/presentation/manger/popular_movies_cubit/popular_movies_cubit.dart';
 import 'package:moviebox/Features/home/presentation/manger/top_rated_movies_cubit/top_rated_movies_cubit.dart';
-import 'package:moviebox/Features/home/presentation/views/home_screen.dart';
 import 'package:moviebox/Features/home/presentation/views/movie_details_screen.dart';
+import 'package:moviebox/Features/main_navigation/persentation/views/main_navigation_screen.dart';
 import 'package:moviebox/Features/search/presentation/manger/search_cubit/search_cubit.dart';
 import 'package:moviebox/Features/search/presentation/manger/trending_cubit/trending_cubit.dart';
-import 'package:moviebox/Features/search/presentation/views/search_screen.dart';
 import 'package:moviebox/core/di/service_locator.dart';
 import 'package:moviebox/core/routes/app_routes.dart';
 
@@ -21,7 +19,13 @@ class AppRouter {
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
       case AppRoutes.splashScreen:
-      // return MaterialPageRoute(builder: (_) => const SplashScreen());
+        // return MaterialPageRoute(builder: (_) => const SplashScreen());
+        return MaterialPageRoute(
+          builder: (_) => const Scaffold(
+            body: Center(child: Text('Splash screen (not built yet)')),
+          ),
+        );
+
       case AppRoutes.loginScreen:
         return MaterialPageRoute(
           builder: (_) => BlocProvider(
@@ -29,6 +33,7 @@ class AppRouter {
             child: const LoginScreen(),
           ),
         );
+
       case AppRoutes.registerScreen:
         return MaterialPageRoute(
           builder: (_) => BlocProvider(
@@ -37,17 +42,20 @@ class AppRouter {
           ),
         );
 
-      case AppRoutes.homeScreen:
+      case AppRoutes.mainScreen:
         return MaterialPageRoute(
           builder: (_) => MultiBlocProvider(
             providers: [
-              BlocProvider(create: (context) => PopularMoviesCubit(getIt())),
-              BlocProvider(create: (context) => TopRatedMoviesCubit(getIt())),
-              BlocProvider(create: (context) => NowPlayingMoviesCubit(getIt())),
+              BlocProvider(create: (_) => PopularMoviesCubit(getIt())),
+              BlocProvider(create: (_) => TopRatedMoviesCubit(getIt())),
+              BlocProvider(create: (_) => NowPlayingMoviesCubit(getIt())),
+              BlocProvider(create: (_) => SearchCubit(getIt())),
+              BlocProvider(create: (_) => TrendingCubit(getIt())..loadTrending()),
             ],
-            child: const HomeScreen(),
+            child: const MainNavigationScreen(),
           ),
         );
+
       case AppRoutes.movieDetailsScreen:
         final movieId = settings.arguments as int;
         return MaterialPageRoute(
@@ -57,22 +65,6 @@ class AppRouter {
             child: const MovieDetailsScreen(),
           ),
         );
-
-      case AppRoutes.searchScreen:
-        return MaterialPageRoute(
-          builder: (_) => MultiBlocProvider(
-            providers: [
-              BlocProvider(create: (context) => SearchCubit(getIt())),
-              BlocProvider(
-                create: (context) => TrendingCubit(getIt())..loadTrending(),
-              ),
-            ],
-            child: const SearchScreen(),
-          ),
-        );
-
-      case AppRoutes.favoritesScreen:
-        return MaterialPageRoute(builder: (_) => const FavoritesScreen());
 
       default:
         return MaterialPageRoute(
