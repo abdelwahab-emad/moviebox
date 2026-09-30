@@ -23,7 +23,7 @@ class MovieBox extends StatelessWidget {
             },
           ),
         ),
-        initialRoute: AppRoutes.loginScreen,
+        initialRoute: AppRoutes.splashScreen,
         onGenerateRoute: AppRouter.generateRoute,
       ),
     );

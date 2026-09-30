@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:moviebox/Features/Splash/presentation/views/splash_screen.dart';
 import 'package:moviebox/Features/auth/presentation/manger/login_cubit/login_cubit.dart';
 import 'package:moviebox/Features/auth/presentation/manger/register_cubit.dart/register_cubit.dart';
 import 'package:moviebox/Features/auth/presentation/views/login_screen.dart';
@@ -19,13 +20,7 @@ class AppRouter {
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
       case AppRoutes.splashScreen:
-        // return MaterialPageRoute(builder: (_) => const SplashScreen());
-        return MaterialPageRoute(
-          builder: (_) => const Scaffold(
-            body: Center(child: Text('Splash screen (not built yet)')),
-          ),
-        );
-
+        return MaterialPageRoute(builder: (_) => const SplashScreen());
       case AppRoutes.loginScreen:
         return MaterialPageRoute(
           builder: (_) => BlocProvider(
@@ -50,7 +45,9 @@ class AppRouter {
               BlocProvider(create: (_) => TopRatedMoviesCubit(getIt())),
               BlocProvider(create: (_) => NowPlayingMoviesCubit(getIt())),
               BlocProvider(create: (_) => SearchCubit(getIt())),
-              BlocProvider(create: (_) => TrendingCubit(getIt())..loadTrending()),
+              BlocProvider(
+                create: (_) => TrendingCubit(getIt())..loadTrending(),
+              ),
             ],
             child: const MainNavigationScreen(),
           ),
