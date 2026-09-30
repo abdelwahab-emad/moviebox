@@ -11,12 +11,14 @@ A Flutter movie discovery app that lets users browse, search, and save their fav
 - ❤️ **Favorites** — Save and manage your favorite movies
 - 👤 **Profile** — Manage user account and preferences
 - 🚀 **Splash Screen** — Smooth app launch experience
+- 🌐 **Robust Networking** — API calls handled through Dio with a dedicated result wrapper and centralized error handling for clean, predictable responses
 
 ## 🛠️ Tech Stack
 
 - **Framework:** Flutter
 - **Language:** Dart
 - **Backend / Auth:** Firebase
+- **Networking:** Dio, with a centralized network layer and structured exception/error handling
 - **Architecture:** Repository pattern with Service Locator (dependency injection)
 
 ## 📱 Screenshots
@@ -43,7 +45,13 @@ lib/
 │   ├── service_locator.dart      # Dependency injection (GetIt)
 │   ├── constants/                # App-wide constants (colors, strings, assets)
 │   ├── theme/                    # App theme & styling
-│   └── utils/                    # Helper functions & extensions
+│   ├── utils/                    # Helper functions & extensions
+│   └── networking/
+│       ├── api_constants.dart        # Base URL & endpoint constants
+│       ├── dio_factory.dart          # Dio client setup (interceptors, timeouts, headers)
+│       ├── api_result.dart           # Generic Success/Failure wrapper for API responses
+│       ├── api_error_model.dart      # Structured error model parsed from API responses
+│       └── api_error_handler.dart    # Maps Dio exceptions to user-friendly error messages
 │
 ├── data/
 │   ├── models/                   # Data models (Movie, User, etc.)
@@ -121,3 +129,6 @@ lib/
 │   └── loading_indicator.dart
 │
 └── main.dart                     # App entry point, BlocProviders setup
+---
+
+Made with ❤️ using Flutter.
