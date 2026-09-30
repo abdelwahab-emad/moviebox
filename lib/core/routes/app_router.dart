@@ -11,6 +11,7 @@ import 'package:moviebox/Features/home/presentation/manger/popular_movies_cubit/
 import 'package:moviebox/Features/home/presentation/manger/top_rated_movies_cubit/top_rated_movies_cubit.dart';
 import 'package:moviebox/Features/home/presentation/views/movie_details_screen.dart';
 import 'package:moviebox/Features/main_navigation/persentation/views/main_navigation_screen.dart';
+import 'package:moviebox/Features/profile/presentation/manger/profile/profile_cubit.dart';
 import 'package:moviebox/Features/search/presentation/manger/search_cubit/search_cubit.dart';
 import 'package:moviebox/Features/search/presentation/manger/trending_cubit/trending_cubit.dart';
 import 'package:moviebox/core/di/service_locator.dart';
@@ -48,6 +49,7 @@ class AppRouter {
               BlocProvider(
                 create: (_) => TrendingCubit(getIt())..loadTrending(),
               ),
+              BlocProvider(create: (_) => ProfileCubit(getIt())),
             ],
             child: const MainNavigationScreen(),
           ),

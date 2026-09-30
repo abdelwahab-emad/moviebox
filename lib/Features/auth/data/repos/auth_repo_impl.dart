@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:moviebox/Features/auth/data/errors/auth_failure.dart';
@@ -7,8 +8,9 @@ import 'package:moviebox/Features/auth/data/repos/auth_repo.dart';
 class AuthRepoImpl implements AuthRepo {
   final FirebaseAuth _firebaseAuth;
   final GoogleSignIn _googleSignIn;
+  final FirebaseFirestore _firestore;
 
-  AuthRepoImpl(this._firebaseAuth, this._googleSignIn);
+  AuthRepoImpl(this._firebaseAuth, this._googleSignIn, this._firestore);
 
   @override
   Future<UserModel> registerWithEmailAndPassword({
@@ -25,6 +27,8 @@ class AuthRepoImpl implements AuthRepo {
       await userCredential.user!.updateDisplayName(name);
 
       final user = userCredential.user!;
+
+      await _saveUserToFirestore(uid: user.uid, name: name, email: email);
 
       return UserModel.fromFirebaseUser(
         uid: user.uid,
@@ -63,16 +67,33 @@ class AuthRepoImpl implements AuthRepo {
   Future<UserModel> signInWithGoogle() async {
     try {
       final googleUser = await _googleSignIn.authenticate();
-      final idToken = googleUser.authentication.idToken;
-      final credential = GoogleAuthProvider.credential(idToken: idToken);
+      final googleAuth = googleUser.authentication;
+
+      final credential = GoogleAuthProvider.credential(
+        idToken: googleAuth.idToken,
+      );
+
       final userCredential = await _firebaseAuth.signInWithCredential(
         credential,
       );
-      final user = userCredential.user!;
+      final user = userCredential.user;
+
+      if (user == null) {
+        throw AuthFailure('failed to recieve user data from firebase');
+      }
+
+      final String uid = user.uid;
+      final String name = user.displayName?.isNotEmpty == true
+          ? user.displayName!
+          : (googleUser.displayName ?? 'user');
+      final String email = user.email ?? googleUser.email;
+      if (userCredential.additionalUserInfo?.isNewUser == true) {
+        await _saveUserToFirestore(uid: uid, name: name, email: email);
+      }
       return UserModel.fromFirebaseUser(
-        uid: user.uid,
-        displayName: user.displayName ?? '',
-        email: user.email!,
+        uid: uid,
+        displayName: name,
+        email: email,
       );
     } on GoogleSignInException catch (e) {
       throw AuthFailure.fromGoogleSignInError(e);
@@ -82,5 +103,21 @@ class AuthRepoImpl implements AuthRepo {
   }
 
   @override
-  Future<void> logOut() async {}
+  Future<void> logOut() async {
+    await _firebaseAuth.signOut();
+    await _googleSignIn.disconnect();
+  }
+
+  Future<void> _saveUserToFirestore({
+    required String uid,
+    required String name,
+    required String email,
+  }) async {
+    await _firestore.collection('users').doc(uid).set({
+      'uid': uid,
+      'name': name,
+      'email': email,
+      'createdAt': FieldValue.serverTimestamp(),
+    });
+  }
 }

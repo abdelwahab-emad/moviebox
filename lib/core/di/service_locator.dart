@@ -9,6 +9,8 @@ import 'package:moviebox/Features/favorites/data/repos/favorites_repo.dart';
 import 'package:moviebox/Features/favorites/data/repos/favorites_repo_impl.dart';
 import 'package:moviebox/Features/home/data/repos/home_repo.dart';
 import 'package:moviebox/Features/home/data/repos/home_repo_impl.dart';
+import 'package:moviebox/Features/profile/data/repos/profile_repo.dart';
+import 'package:moviebox/Features/profile/data/repos/profile_repo_impl.dart';
 import 'package:moviebox/Features/search/data/repos/search_repo.dart';
 import 'package:moviebox/Features/search/data/repos/search_repo_impl.dart';
 import 'package:moviebox/core/genres/genre_cache.dart';
@@ -20,6 +22,7 @@ GetIt getIt = GetIt.instance;
 
 Future<void> setupGetIt() async {
   FirebaseAuth firebaseAuth = FirebaseAuth.instance;
+  FirebaseFirestore firestore = FirebaseFirestore.instance;
 
   GoogleSignIn googleSignIn = GoogleSignIn.instance;
   await googleSignIn.initialize(
@@ -29,7 +32,12 @@ Future<void> setupGetIt() async {
 
   getIt.registerLazySingleton<FirebaseAuth>(() => firebaseAuth);
   getIt.registerLazySingleton<GoogleSignIn>(() => googleSignIn);
-  getIt.registerLazySingleton<AuthRepo>(() => AuthRepoImpl(getIt(), getIt()));
+  getIt.registerLazySingleton<FirebaseFirestore>(
+    () => firestore,
+  );
+  getIt.registerLazySingleton<AuthRepo>(
+    () => AuthRepoImpl(getIt(), getIt(), getIt()),
+  );
 
   getIt.registerLazySingleton<Dio>(() => DioFactory.getDio());
   getIt.registerLazySingleton<HomeRepo>(() => HomeRepoImpl(getIt()));
@@ -39,10 +47,9 @@ Future<void> setupGetIt() async {
   getIt.registerLazySingleton<GenreCache>(() => GenreCache());
   await getIt<GenreCache>().load(getIt<GenreRepo>());
 
-  getIt.registerLazySingleton<FirebaseFirestore>(
-    () => FirebaseFirestore.instance,
-  );
   getIt.registerLazySingleton<FavoritesRepo>(
     () => FavoritesRepoImpl(getIt(), getIt()),
   );
+
+  getIt.registerLazySingleton<ProfileRepo>(() => ProfileRepoImpl(getIt()));
 }

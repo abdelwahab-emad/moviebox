@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:moviebox/Features/favorites/presentation/views/favorites_screen.dart';
 import 'package:moviebox/Features/home/presentation/views/home_screen.dart';
 import 'package:moviebox/Features/main_navigation/persentation/views/widgets/custom_bottom_nav_bar.dart';
-import 'package:moviebox/Features/profile/presentation/views/profile_view.dart';
+import 'package:moviebox/Features/profile/presentation/views/profile_screen.dart';
 import 'package:moviebox/Features/search/presentation/views/search_screen.dart';
 import 'package:moviebox/core/navigation_controller.dart';
 
