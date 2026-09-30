@@ -5,7 +5,7 @@ A Flutter movie discovery app that lets users browse, search, and save their fav
 ## ✨ Features
 
 - 🔐 **Authentication** — Login & Register with Firebase Auth, plus **Sign in with Google**
-- 🏠 **Home** — Browse trending, popular movies, top rated movies
+- 🏠 **Home** — Browse trending and popular movies
 - 🔍 **Search** — Find movies quickly by title
 - 📄 **Details** — View full movie information (overview, rating, cast, etc.)
 - ❤️ **Favorites** — Save and manage your favorite movies
@@ -23,15 +23,15 @@ A Flutter movie discovery app that lets users browse, search, and save their fav
 
 | Splash | Login | Register |
 |--------|-------|----------|
-| ![Splash](screenshots/splash_screen.jpeg) | ![Login](screenshots/login_screen.jpeg) | ![Register](screenshots/register_screen.jpeg) |
+| <img src="screenshots/splash_screen.jpeg" width="200"/> | <img src="screenshots/login_screen.jpeg" width="200"/> | <img src="screenshots/register_screen.jpeg" width="200"/> |
 
 | Home | Search | Details |
 |------|--------|---------|
-| ![Home](screenshots/home_screen.jpeg) | ![Search](screenshots/search_screen.jpeg) | ![Details](screenshots/details_screen.jpeg) |
+| <img src="screenshots/home_screen.jpeg" width="200"/> | <img src="screenshots/search_screen.jpeg" width="200"/> | <img src="screenshots/details_screen.jpeg" width="200"/> |
 
 | Favorites | Profile |
 |-----------|---------|
-| ![Favorites](screenshots/favorites_screen.jpeg) | ![Profile](screenshots/profile_screen.jpeg) |
+| <img src="screenshots/favorites_screen.jpeg" width="200"/> | <img src="screenshots/profile_screen.jpeg" width="200"/> |
 
 ## 📂 Project Structure
 
