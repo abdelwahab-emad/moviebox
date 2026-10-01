@@ -1,134 +1,112 @@
 # 🎬 MovieBox
 
-A Flutter movie discovery app that lets users browse, search, and save their favorite movies, with secure authentication and a clean, modern UI.
+MovieBox is a movie discovery app built with Flutter and Firebase. It lets users sign up, browse now playing and popular movies, search for any title, and save their favorites to their own account.
+
+The app is built with a feature-first Clean Architecture, so each feature is self-contained and easy to maintain.
 
 ## ✨ Features
 
-- 🔐 **Authentication** — Login & Register with Firebase Auth, plus **Sign in with Google**
-- 🏠 **Home** — Browse trending and popular movies
-- 🔍 **Search** — Find movies quickly by title
-- 📄 **Details** — View full movie information (overview, rating, cast, etc.)
-- ❤️ **Favorites** — Save and manage your favorite movies
-- 👤 **Profile** — Manage user account and preferences
-- 🚀 **Splash Screen** — Smooth app launch experience
-- 🌐 **Robust Networking** — API calls handled through Dio with a dedicated result wrapper and centralized error handling for clean, predictable responses
-
-## 🛠️ Tech Stack
-
-- **Framework:** Flutter
-- **Language:** Dart
-- **Backend / Auth:** Firebase
-- **Networking:** Dio, with a centralized network layer and structured exception/error handling
-- **Architecture:** Repository pattern with Service Locator (dependency injection)
+- **Authentication** — sign up and log in with email/password or Google Sign-In via Firebase Auth
+- **Home feed** — browse now playing and popular movies
+- **Movie details** — view a movie's overview, genres, and star rating
+- **Search** — find movies instantly, with a trending section and recent searches
+- **Favorites** — add and remove favorite movies, saved per user in Cloud Firestore
+- **Profile** — view and manage your account
 
 ## 📱 Screenshots
 
-| Splash | Login | Register |
-|--------|-------|----------|
-| <img src="screenshots/splash_screen.jpeg" width="200"/> | <img src="screenshots/login_screen.jpeg" width="200"/> | <img src="screenshots/register_screen.jpeg" width="200"/> |
+| Splash | Login | Register | Home |
+| :---: | :---: | :---: | :---: |
+| <img src="screenshots/splash_screen.jpeg" width="180" /> | <img src="screenshots/login_screen.jpeg" width="180" /> | <img src="screenshots/register_screen.jpeg" width="180" /> | <img src="screenshots/home_screen.jpeg" width="180" /> |
 
-| Home | Search | Details |
-|------|--------|---------|
-| <img src="screenshots/home_screen.jpeg" width="200"/> | <img src="screenshots/search_screen.jpeg" width="200"/> | <img src="screenshots/details_screen.jpeg" width="200"/> |
+| Details | Search | Profile |
+| :---: | :---: | :---: |
+| <img src="screenshots/details_screen.jpeg" width="180" /> | <img src="screenshots/search_screen.jpeg" width="180" /> | <img src="screenshots/profile_screen.jpeg" width="180" /> |
 
-| Favorites | Profile |
-|-----------|---------|
-| <img src="screenshots/favorites_screen.jpeg" width="200"/> | <img src="screenshots/profile_screen.jpeg" width="200"/> |
+## ⚙️ Technical Highlights
 
-## 📂 Project Structure
+- **State management:** Cubit with `flutter_bloc`
+- **Architecture:** feature-first Clean Architecture, split into data and presentation layers
+- **Backend:** Firebase (Authentication, Cloud Firestore) for user accounts and favorites
+- **Networking:** `dio` with centralized API error handling, fetching movie data from the TMDB API
+- **Dependency injection:** `get_it` with `injectable`
+- **Performance:** genres are cached in memory to avoid repeated network calls
 
-The project follows a **feature-first** structure, where each screen has its own `Cubit` for state management, paired with its UI and widgets.
+## 🧰 Tech Stack
+
+| Layer | Technology |
+|---|---|
+| Framework | Flutter (Dart) |
+| State Management | flutter_bloc (Cubit) |
+| Networking | Dio, Pretty Dio Logger |
+| Backend / Database | Firebase Cloud Firestore |
+| Authentication | Firebase Auth, Google Sign-In |
+| Dependency Injection | get_it, injectable |
+| Movie Data | TMDB API |
+
+## 📁 Project Structure
 
 ```
 lib/
 ├── core/
-│   ├── service_locator.dart      # Dependency injection (GetIt)
-│   ├── constants/                # App-wide constants (colors, strings, assets)
-│   ├── theme/                    # App theme & styling
-│   ├── utils/                    # Helper functions & extensions
-│   └── networking/
-│       ├── api_constants.dart        # Base URL & endpoint constants
-│       ├── dio_factory.dart          # Dio client setup (interceptors, timeouts, headers)
-│       ├── api_result.dart           # Generic Success/Failure wrapper for API responses
-│       ├── api_error_model.dart      # Structured error model parsed from API responses
-│       └── api_error_handler.dart    # Maps Dio exceptions to user-friendly error messages
+│   ├── di/
+│   │   └── service_locator.dart      # Dependency injection (GetIt)
+│   ├── errors/
+│   │   ├── failures.dart                 # Shared Failure classes
+│   │   └── firestore_error_handler.dart  # Maps Firestore errors to messages
+│   ├── genres/                       # Genre repo + in-memory cache
+│   ├── networking/
+│   │   ├── api_constants.dart            # Base URL & endpoint constants
+│   │   ├── dio_factory.dart              # Dio client setup
+│   │   ├── api_result.dart               # Success/Failure wrapper for API responses
+│   │   ├── api_error_model.dart          # Error model parsed from API responses
+│   │   └── api_error_handler.dart        # Maps Dio exceptions to readable messages
+│   ├── routes/                       # app_router.dart, app_routes.dart
+│   ├── widgets/                      # Shared widgets (buttons, fields, grid, loading, error, rating)
+│   ├── assets.dart                   # Asset paths
+│   ├── navigation_controller.dart    # Navigation helpers
+│   └── styles.dart                   # App-wide text styles
 │
-├── data/
-│   ├── models/                   # Data models (Movie, User, etc.)
-│   └── repositories/
-│       ├── profile_repo.dart          # Repository interface
-│       ├── profile_repo_impl.dart     # Repository implementation
-│       ├── movie_repo.dart
-│       └── auth_repo.dart
-│
-├── screens/
-│   ├── splash/
-│   │   └── splash_screen.dart
-│   │
+├── Features/
 │   ├── auth/
-│   │   ├── login/
-│   │   │   ├── login_screen.dart
-│   │   │   ├── cubit/
-│   │   │   │   ├── login_cubit.dart
-│   │   │   │   └── login_state.dart
-│   │   │   └── widgets/
-│   │   │       └── google_sign_in_button.dart
-│   │   └── register/
-│   │       ├── register_screen.dart
-│   │       ├── cubit/
-│   │       │   ├── register_cubit.dart
-│   │       │   └── register_state.dart
-│   │       └── widgets/
+│   │   ├── data/
+│   │   │   ├── errors/               # Auth failures
+│   │   │   ├── models/               # user_model.dart
+│   │   │   └── repos/                # auth_repo + auth_repo_impl
+│   │   └── presentation/
+│   │       ├── manger/               # login_cubit, register_cubit
+│   │       └── views/                # login_screen, register_screen, widgets/
 │   │
 │   ├── home/
-│   │   ├── home_screen.dart
-│   │   ├── cubit/
-│   │   │   ├── home_cubit.dart
-│   │   │   └── home_state.dart
-│   │   └── widgets/
-│   │       ├── movie_card.dart
-│   │       ├── category_list.dart
-│   │       └── trending_slider.dart
+│   │   ├── data/
+│   │   │   ├── models/               # movie_model.dart
+│   │   │   └── repos/                # home_repo + home_repo_impl
+│   │   └── presentation/
+│   │       ├── manger/               # now playing, popular, movie details cubits
+│   │       └── views/                # home_screen, movie_details_screen, widgets/
 │   │
 │   ├── search/
-│   │   ├── search_screen.dart
-│   │   ├── cubit/
-│   │   │   ├── search_cubit.dart
-│   │   │   └── search_state.dart
-│   │   └── widgets/
-│   │       └── search_result_item.dart
-│   │
-│   ├── details/
-│   │   ├── details_screen.dart
-│   │   ├── cubit/
-│   │   │   ├── details_cubit.dart
-│   │   │   └── details_state.dart
-│   │   └── widgets/
-│   │       ├── movie_info_section.dart
-│   │       └── cast_list.dart
+│   │   ├── data/repos/               # search_repo + search_repo_impl
+│   │   └── presentation/
+│   │       ├── manger/               # search_cubit, trending_cubit
+│   │       └── views/                # search_screen + widgets (results, recent searches, trending)
 │   │
 │   ├── favorites/
-│   │   ├── favorites_screen.dart
-│   │   ├── cubit/
-│   │   │   ├── favorites_cubit.dart
-│   │   │   └── favorites_state.dart
-│   │   └── widgets/
-│   │       └── favorite_item.dart
+│   │   ├── data/repos/               # favorites_repo + favorites_repo_impl
+│   │   └── presentation/
+│   │       ├── manger/cubit/         # favorites_cubit, favorites_state
+│   │       └── views/                # favorites_screen, widgets/
 │   │
-│   └── profile/
-│       ├── profile_screen.dart
-│       ├── cubit/
-│       │   ├── profile_cubit.dart
-│       │   └── profile_state.dart
-│       └── widgets/
-│           └── profile_option_tile.dart
+│   ├── profile/
+│   │   ├── data/repos/               # profile_repo + profile_repo_impl
+│   │   └── presentation/
+│   │       ├── manger/profile/       # profile_cubit, profile_state
+│   │       └── views/                # profile_screen, widgets/
+│   │
+│   ├── main_navigation/              # Bottom navigation shell
+│   └── Splash/                       # Splash screen
 │
-├── widgets/                      # Shared/reusable widgets across screens
-│   ├── custom_button.dart
-│   ├── custom_text_field.dart
-│   └── loading_indicator.dart
-│
-└── main.dart                     # App entry point, BlocProviders setup
----
-
-Made with ❤️ using Flutter.
+├── constants.dart                    # App-wide constants
+├── firebase_options.dart             # Firebase configuration
+├── main.dart                         # App entry point
+└── movie_box.dart                    # Root app widget
